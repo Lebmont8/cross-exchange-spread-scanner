@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cross-Exchange Spread Scanner</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/ui.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Cross-Exchange Spread Scanner</h1>
+      <p>Compare both directions of a two-venue BTC spread. Check whether the edge survives book depth and taker fees.</p>
+    </header>
+    <form action="/api/replay" method="get">
+      <label for="size">Matched size (BTC)
+        <input type="number" id="size" name="size" value="0.25" min="0.000001" max="100" step="0.000001" required>
+      </label>
+      <label for="minimum">Minimum net edge (bp)
+        <input type="number" id="minimum" name="minimum" value="3" min="0" max="10000" step="0.1" required>
+      </label>
+      <label for="age">Maximum quote age (ms)
+        <input type="number" id="age" name="age" value="1500" min="0" max="60000" step="1" required>
+      </label>
+      <button type="submit">Compare routes</button>
+    </form>
+    <p id="error" role="alert"></p>
+    <p id="status" role="status"></p>
+    <dl id="metrics" aria-label="Replay totals"></dl>
+    <h2 id="result-heading">Route evaluations</h2>
+    <div class="table" tabindex="0" role="region" aria-labelledby="result-heading">
+      <table aria-labelledby="result-heading">
+        <thead><tr></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <noscript><p>JavaScript is only needed to render the table. The form opens the JSON result without it.</p></noscript>
+  </main>
+</body>
+</html>
